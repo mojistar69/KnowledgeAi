@@ -1,0 +1,7 @@
+cd D:\knowledgeBookAI
+
+python -m uvicorn app.main:app --reload
+
+
+cd android\sdk\platform-tools
+adb reverse tcp:8000 tcp:8000
