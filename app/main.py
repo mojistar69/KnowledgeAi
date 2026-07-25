@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from app.api import quran
+from app.api import insight
+
+
 
 
 app = FastAPI(
@@ -11,7 +14,7 @@ app.include_router(
     quran.router,
     prefix="/api/quran"
 )
-
+app.include_router(insight.router)
 
 @app.get("/")
 def home():
