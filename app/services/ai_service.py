@@ -1,6 +1,6 @@
 from openai import OpenAI
 import json
-
+from datetime import datetime
 client = OpenAI(
     base_url="https://api.gapgpt.app/v1",
     api_key="sk-j0cuDPqCqkSx7hLhdb49WPLwCLqAfYnMsEDse6aJKvENKeIC"
@@ -111,3 +111,60 @@ def get_ai_insight(verse: str):
     text = text.replace("```", "")
 
     return json.loads(text)
+    
+    # =====================================================
+# پیام روز
+# =====================================================
+    
+def get_daily_message():
+
+        today = datetime.now().strftime("%Y-%m-%d")
+
+        prompt = f"""
+        امروز تاریخ {today} است.
+
+        اگر امروز مناسبت مذهبی یا ملی مهمی وجود دارد،
+        یک آیه مناسب همان مناسبت انتخاب کن.
+        
+        اگر مناسبتی وجود ندارد،
+        یک آیه امیدبخش و الهام‌بخش برای زندگی امروز انتخاب کن.
+        متن آیه شماره آیه و نام سوره در پایان
+        بهمراه تناسب روز و آیه
+        و تاریخ کامل شمسی و قمری
+        فقط JSON معتبر برگردان.
+
+        {{
+        "title":"",
+        "verse":"",
+        "surah":"",
+        "translation":"",
+        "message":"",
+        "prayer":"",
+        "action":""
+        "number":""
+        "related":""
+        }}
+        """
+
+        response = client.chat.completions.create(
+        model="gpt-4o",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a Quran expert."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.6
+    )
+
+        text = response.choices[0].message.content
+    
+        text = text.replace("```json", "")
+        text = text.replace("```", "")
+        text = text.strip()
+
+        return json.loads(text)
