@@ -1,0 +1,12 @@
+git add .
+git commit -m "..."
+git push
+
+
+------------
+ cd /opt/KnowledgeAi/
+ git pull
+
+sudo systemctl daemon-reload
+systemctl restart quran-api
+systemctl status quran-api

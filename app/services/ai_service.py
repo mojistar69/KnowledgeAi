@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 client = OpenAI(
     base_url="https://api.gapgpt.app/v1",
-    api_key="sk-j0cuDPqCqkSx7hLhdb49WPLwCLqAfYnMsEDse6aJKvENKeIC"
+    api_key="sk-dpEuengfTKObsA82MBxrd00RwTCTLKjGWPv7PipD5FU1Vqgo"
 )
 
 
